@@ -1,92 +1,73 @@
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* BODY */
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #020617);
+    background: linear-gradient(135deg, #0f172a, #1e293b);
     color: white;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
 }
 
 /* CONTENEDOR */
 .contenedor {
     background-color: #1e293b;
     padding: 25px;
-    border-radius: 16px;
-
-    width: 100%;
-    max-width: 420px;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
 /* TITULOS */
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 1.6rem;
 }
 
 h2 {
     margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
 }
 
 /* LABELS */
 label {
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
+    font-size: 14px;
     color: #cbd5f5;
 }
 
 /* INPUTS */
 input {
     width: 100%;
-    padding: 10px;
-
-    border-radius: 8px;
-    border: none;
-    outline: none;
-
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    border-radius: 6px;
+    border: 1px solid #334155;
     background-color: #0f172a;
     color: white;
-
-    font-size: 1rem;
-    margin-bottom: 10px;
+    outline: none;
+    transition: 0.3s;
 }
 
-/* BOTON */
+/* EFECTO FOCUS */
+input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 5px #22c55e;
+}
+
+/* BOTÓN */
 button {
     width: 100%;
-    padding: 12px;
-
-    border-radius: 10px;
-    border: none;
-
+    padding: 10px;
+    margin-top: 10px;
     background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    border-radius: 8px;
     color: white;
-
-    font-size: 1rem;
     font-weight: bold;
-
     cursor: pointer;
     transition: 0.3s;
 }
 
+/* HOVER BOTÓN */
 button:hover {
     transform: scale(1.03);
     background: linear-gradient(135deg, #16a34a, #15803d);
@@ -94,48 +75,22 @@ button:hover {
 
 /* RESULTADOS */
 p {
+    font-size: 14px;
     margin: 5px 0;
-    font-size: 0.95rem;
 }
 
+/* MENSAJES DE ERROR 🔴 */
 span {
-    font-weight: bold;
-    color: #22c55e;
+    color: #ef4444;
+    font-style: italic;
+    font-size: 12px;
+    display: block;
+    min-height: 14px; /* evita que el diseño salte */
+    margin-bottom: 8px;
 }
 
-/* 📱 RESPONSIVE PARA CELULARES */
-@media (max-width: 480px) {
-    .contenedor {
-        padding: 20px;
-        border-radius: 12px;
-    }
-
-    h1 {
-        font-size: 1.3rem;
-    }
-
-    h2 {
-        font-size: 1.1rem;
-    }
-
-    input {
-        font-size: 0.9rem;
-        padding: 8px;
-    }
-
-    button {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-}
-
-/* 📲 TABLETS */
-@media (min-width: 481px) and (max-width: 768px) {
-    .contenedor {
-        max-width: 500px;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
+/* OPCIONAL: INPUT CON ERROR */
+input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 5px #ef4444;
 }

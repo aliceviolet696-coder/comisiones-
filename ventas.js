@@ -11,60 +11,83 @@ function calcularComision(numeroVentas, precioProducto) {
     return comision;
 }
 
-// ✅ VALIDACIÓN COMPLETA
-function validarVentas() {
-    let numeroVentasStr = recuperarTexto("txtVentas");
-    let spError = document.getElementById("errorVentas");
-
-    spError.textContent = "";
-
-    if (numeroVentasStr.trim() === "") {
-        spError.textContent = "Campo obligatorio";
-        return false;
-    }
-
-    if (!/^\d+$/.test(numeroVentasStr)) {
-        spError.textContent = "Solo números";
-        return false;
-    }
-
-    if (numeroVentasStr.length > 5) {
-        spError.textContent = "Máximo 5 dígitos";
-        return false;
-    }
-
-    return true;
-}
-
-// (opcional pero recomendado)
-function validarCampoNumerico(idInput, idError) {
+// 🔴 FUNCIÓN GENERAL DE VALIDACIÓN
+function validarNumero(idInput, idError, opciones) {
     let valor = recuperarTexto(idInput);
-    let spError = document.getElementById(idError);
+    let input = document.getElementById(idInput);
+    let error = document.getElementById(idError);
 
-    spError.textContent = "";
+    error.textContent = "";
+    input.classList.remove("error");
 
     if (valor.trim() === "") {
-        spError.textContent = "Campo obligatorio";
+        error.textContent = "Campo obligatorio";
+        input.classList.add("error");
         return false;
     }
 
-    if (!/^\d+(\.\d+)?$/.test(valor)) {
-        spError.textContent = "Solo números";
+    if (opciones.entero) {
+        if (!/^\d+$/.test(valor)) {
+            error.textContent = "Solo números enteros";
+            input.classList.add("error");
+            return false;
+        }
+    } else {
+        if (!/^\d+(\.\d+)?$/.test(valor)) {
+            error.textContent = "Formato numérico inválido";
+            input.classList.add("error");
+            return false;
+        }
+    }
+
+    let numero = parseFloat(valor);
+
+    if (numero < opciones.min) {
+        error.textContent = "Valor mínimo: " + opciones.min;
+        input.classList.add("error");
+        return false;
+    }
+
+    if (numero > opciones.max) {
+        error.textContent = "Valor máximo: " + opciones.max;
+        input.classList.add("error");
+        return false;
+    }
+
+    if (opciones.maxLength && valor.length > opciones.maxLength) {
+        error.textContent = "Máximo " + opciones.maxLength + " dígitos";
+        input.classList.add("error");
         return false;
     }
 
     return true;
 }
 
+// 🟢 FUNCIÓN PRINCIPAL
 function calcular() {
 
-    let esValido = true;
+    let valido = true;
 
-    if (!validarVentas()) esValido = false;
-    if (!validarCampoNumerico("txtSueldoBase", "errorSueldo")) esValido = false;
-    if (!validarCampoNumerico("txtPrecio", "errorPrecio")) esValido = false;
+    if (!validarNumero("txtSueldoBase", "errorSueldo", {
+        entero: false,
+        min: 0,
+        max: 100000
+    })) valido = false;
 
-    if (!esValido) return;
+    if (!validarNumero("txtVentas", "errorVentas", {
+        entero: true,
+        min: 0,
+        max: 99999,
+        maxLength: 5
+    })) valido = false;
+
+    if (!validarNumero("txtPrecio", "errorPrecio", {
+        entero: false,
+        min: 0.01,
+        max: 10000
+    })) valido = false;
+
+    if (!valido) return;
 
     let sueldoBase = recuperarFloat("txtSueldoBase");
     let numeroVentas = recuperarFloat("txtVentas");

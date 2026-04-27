@@ -1,0 +1,23 @@
+Prompt 1:
+Necesito validar un formulario en JavaScript sin usar alert.
+Quiero que los errores aparezcan debajo de cada input, en color rojo y cursiva.
+Los campos son: sueldo base, número de ventas y precio del producto.
+
+Prompt 2:
+Genera validaciones completas que incluyan:
+- Campos obligatorios
+- Solo números (enteros y decimales según el caso)
+- Valores mínimos y máximos
+- Validación de longitud (máximo 5 dígitos para ventas)
+
+Prompt 3:
+Quiero una función reutilizable en JavaScript para validar inputs numéricos,
+que reciba como parámetros el id del input, el id del mensaje de error y las reglas.
+
+Prompt 4:
+Las validaciones deben ejecutarse al presionar un botón y evitar el cálculo si hay errores.
+También quiero que el input se marque en rojo cuando tenga error.
+
+Prompt 5:
+El formulario calcula comisión en base a ventas, así que necesito que los datos sean válidos
+antes de hacer cualquier operación matemática.
